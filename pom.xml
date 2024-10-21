@@ -12,6 +12,7 @@
   <modules>
     <module>StorageService</module>
     <module>LibraryService</module>
+      <module>eureka-server</module>
   </modules>
 
   <properties>

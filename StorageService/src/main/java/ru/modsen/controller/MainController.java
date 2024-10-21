@@ -11,7 +11,6 @@ import ru.modsen.service.BookService;
 
 import java.util.List;
 
-@Slf4j
 @RestController
 @RequestMapping("api/v1/storage")
 @AllArgsConstructor

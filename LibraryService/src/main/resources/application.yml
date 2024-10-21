@@ -1,0 +1,16 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: libraryService
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres2
+    username: postgres
+    password: helloWRLD
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
