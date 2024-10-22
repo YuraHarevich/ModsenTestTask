@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,14 +32,12 @@ public class TookBook {
     private Long id;
 
     @Schema(description = "id взятой книги", example = "1")
-    @NotBlank(message = "Отсутсвует id взятой книги")
+    @NotNull
     private long book_id;
 
     @Schema(description = "время взятия книги", example = "1")
-    @NotBlank(message = "Отсутсвует время взятия книги")
     private LocalDateTime took_time;
 
     @Schema(description = "время возврата книги", example = "1")
-    @NotBlank(message = "Отсутсвует время возврата книги")
     private LocalDateTime back_time;
 }

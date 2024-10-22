@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.modsen.domain.TookBook;
 import ru.modsen.repository.LibraryRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,5 +17,9 @@ public class LibraryService {
     }
     public Optional<TookBook> getById(long id){
         return repository.findById(id);
+    }
+
+    public List<TookBook> getAll() {
+        return repository.findAll();
     }
 }

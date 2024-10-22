@@ -20,17 +20,20 @@ public class BookService {
     private final RestTemplate restTemplate;
     public void save(Book book){
         //temporary solution
+        repository.saveAndFlush(book);
+        log.info("book was successfully saved into library!!!");
         try {
         restTemplate.postForObject(
-                "http://localhost:8081/api/v1/accounting/add/{customerId}",
+                "http://libraryService/api/v1/accounting/add/{customerId}",
                 null,
                 Void.class,
                 book.getId());
         } catch (HttpClientErrorException e) {
-            log.error("!!!book wasnt saved at accounting service!!!");
+            log.error("!!!book wasn't saved at accounting service!!!");
         }
+        log.info("book was successfully took!!!");
         //temporary solution
-        repository.save(book);
+
     }
     public List<Book> getAllBooks(){
         return repository.findAll();

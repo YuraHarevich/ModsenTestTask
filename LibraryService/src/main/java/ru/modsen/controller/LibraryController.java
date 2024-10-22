@@ -13,6 +13,7 @@ import ru.modsen.domain.TookBook;
 import ru.modsen.service.LibraryService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/accounting")
@@ -20,15 +21,20 @@ import java.time.LocalDateTime;
 @Tag(name = "Сервис учета взятых книг")
 public class LibraryController {
     private final LibraryService service;
-    @PostMapping("add/{id}")
+
     @Operation(summary = "Добавление взятой книги")
+    @PostMapping("add/{id}")
     public ResponseEntity<Void> createNewBook(@PathVariable("id") long id){
         TookBook book = TookBook.builder()
                 .book_id(id)
-                .back_time(LocalDateTime.now())
+                .took_time(LocalDateTime.now())
                 .back_time(LocalDateTime.now().plusHours(10))
                 .build();
         service.save(book);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("get")
+    public List<TookBook> getAll(){
+        return service.getAll();
     }
 }
