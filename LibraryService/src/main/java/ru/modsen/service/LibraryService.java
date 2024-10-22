@@ -19,6 +19,8 @@ public class LibraryService {
         return repository.findById(id);
     }
 
+    //метод создан исключительно для тестов
+    @Deprecated
     public List<TookBook> getAll() {
         return repository.findAll();
     }

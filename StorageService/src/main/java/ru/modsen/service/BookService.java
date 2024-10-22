@@ -24,7 +24,7 @@ public class BookService {
         log.info("book was successfully saved into library!!!");
         try {
         restTemplate.postForObject(
-                "http://libraryService/api/v1/accounting/add/{customerId}",
+                "http://accountant/api/v1/accounting/add/{customerId}",
                 null,
                 Void.class,
                 book.getId());

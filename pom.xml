@@ -13,6 +13,7 @@
     <module>StorageService</module>
     <module>LibraryService</module>
       <module>eureka-server</module>
+      <module>api-gateway</module>
   </modules>
 
   <properties>
