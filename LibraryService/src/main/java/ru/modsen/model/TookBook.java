@@ -1,10 +1,7 @@
-package ru.modsen.domain;
+package ru.modsen.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

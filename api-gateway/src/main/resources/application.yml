@@ -1,6 +1,8 @@
 server:
     port: 8765
-
+token:
+  signing:
+    key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
 spring:
     application:
         name: api-gateway
@@ -10,4 +12,16 @@ spring:
             locator:
               enabled: true
               lower-case-service-id: true
-
+          routes:
+            - id: library
+              uri: lb://LIBRARY-SERVICE
+              predicates:
+                - Path=/storage/**
+            - id: accountant
+              uri: lb://ACCOUNTANT-SERVICE
+              predicates:
+                - Path=/accountant/**
+            - id: authentication
+              uri: lb://AUTH-SERVICE
+              predicates:
+                - Path=/authentication/**

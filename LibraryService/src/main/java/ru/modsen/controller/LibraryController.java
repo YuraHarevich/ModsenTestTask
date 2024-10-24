@@ -2,21 +2,17 @@ package ru.modsen.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.hc.core5.http.HttpResponse;
-import org.apache.hc.core5.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.modsen.domain.TookBook;
+import ru.modsen.model.TookBook;
 import ru.modsen.service.LibraryService;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/accounting")
+@RequestMapping("accountant")
 @AllArgsConstructor
 @Tag(name = "Сервис учета взятых книг")
 public class LibraryController {

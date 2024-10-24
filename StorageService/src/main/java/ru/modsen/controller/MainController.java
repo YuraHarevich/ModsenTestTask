@@ -4,15 +4,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.modsen.domain.Book;
+import ru.modsen.model.Book;
 import ru.modsen.service.BookService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/storage")
+@RequestMapping("storage")
 @AllArgsConstructor
 @Tag(name = "Библиотека")
 public class MainController {

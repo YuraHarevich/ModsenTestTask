@@ -1,7 +1,7 @@
 package ru.modsen.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.modsen.domain.Book;
+import ru.modsen.model.Book;
 
 import java.util.Optional;
 

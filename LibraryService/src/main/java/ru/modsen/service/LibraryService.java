@@ -2,7 +2,7 @@ package ru.modsen.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.modsen.domain.TookBook;
+import ru.modsen.model.TookBook;
 import ru.modsen.repository.LibraryRepository;
 
 import java.util.List;

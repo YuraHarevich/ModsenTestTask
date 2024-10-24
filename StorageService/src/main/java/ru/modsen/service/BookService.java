@@ -5,8 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import ru.modsen.domain.Author;
-import ru.modsen.domain.Book;
+import ru.modsen.model.Book;
 import ru.modsen.repository.BookRepository;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class BookService {
         log.info("book was successfully saved into library!!!");
         try {
         restTemplate.postForObject(
-                "http://accountant/api/v1/accounting/add/{customerId}",
+                "http://ACCOUNTANT-SERVICE/accountant/add/{customerId}",
                 null,
                 Void.class,
                 book.getId());

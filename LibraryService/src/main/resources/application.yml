@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   application:
-    name: accountant
+    name: accountant-service
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres2
     username: postgres
