@@ -7,10 +7,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>StorageService</artifactId>
+    <artifactId>accountant-service</artifactId>
     <packaging>jar</packaging>
 
-    <name>StorageService</name>
+    <name>accountant-service</name>
     <url>http://maven.apache.org</url>
 
     <properties>

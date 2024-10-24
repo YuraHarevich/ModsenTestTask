@@ -10,11 +10,11 @@
   <name>ModsenTestProject</name>
   <url>http://maven.apache.org</url>
   <modules>
-    <module>StorageService</module>
-    <module>LibraryService</module>
+    <module>accountant-service</module>
+    <module>storage-service</module>
       <module>eureka-server</module>
       <module>api-gateway</module>
-      <module>Authentication</module>
+      <module>authentication-service</module>
       <module>user-service</module>
   </modules>
 

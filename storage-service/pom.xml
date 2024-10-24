@@ -7,10 +7,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>LibraryService</artifactId>
+    <artifactId>storage-service</artifactId>
     <packaging>jar</packaging>
 
-    <name>LibraryService</name>
+    <name>storage-service</name>
     <url>http://maven.apache.org</url>
 
     <properties>
