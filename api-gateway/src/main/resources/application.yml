@@ -14,7 +14,7 @@ spring:
               lower-case-service-id: true
           routes:
             - id: library
-              uri: lb://LIBRARY-SERVICE
+              uri: lb://STORAGE-SERVICE
               predicates:
                 - Path=/storage/**
             - id: accountant
@@ -25,3 +25,9 @@ spring:
               uri: lb://AUTH-SERVICE
               predicates:
                 - Path=/authentication/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-service:8761/eureka
+  fetch-registry: true
+  register-with-eureka: true

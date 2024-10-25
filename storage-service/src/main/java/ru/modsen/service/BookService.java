@@ -23,7 +23,7 @@ public class BookService {
         log.info("book was successfully saved into library!!!");
         try {
         restTemplate.postForObject(
-                "http://ACCOUNTANT-SERVICE/accountant/add/{customerId}",
+                "http://ACCOUNTANT-SERVICE/accountant/add/{bookId}",
                 null,
                 Void.class,
                 book.getId());

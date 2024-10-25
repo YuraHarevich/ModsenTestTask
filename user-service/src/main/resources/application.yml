@@ -4,7 +4,7 @@ spring:
   application:
     name: user-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres2
+    url: jdbc:postgresql://user_db:5432/postgres3
     username: postgres
     password: helloWRLD
   jpa:
@@ -17,6 +17,6 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-service:8761/eureka
   fetch-registry: true
   register-with-eureka: true

@@ -1,6 +1,7 @@
 volumes:
   postgres_first_db:
   postgres_second_db:
+  postgres_third_db:
 
 services:
   eureka-service:
@@ -33,6 +34,18 @@ services:
       - postgres_first_db:/var/lib/postgresql/data
     ports:
       - "5434:5432"
+  user_postgres:
+    image: postgres:13.3
+    container_name: user_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: helloWRLD
+      POSTGRES_DB: postgres3
+    volumes:
+      - postgres_third_db:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
   #  --------------Services--------------
   accountant-service:
     restart: always
@@ -43,7 +56,6 @@ services:
     depends_on:
       - accountant_postgres
       - eureka-service
-
 
   storage-service:
     build:
@@ -56,4 +68,35 @@ services:
       - accountant-service
       - eureka-service
 
+  gateway-service:
+    build:
+      context: api-gateway
+    restart: always
+    ports:
+      - "8765:8765"
+    depends_on:
+      - accountant-service
+      - eureka-service
+      - storage-service
+      - authentication-service
+      - user-service
 
+  authentication-service:
+    build:
+      context: authentication-service
+    restart: always
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-service
+      - user-service
+
+  user-service:
+    build:
+      context: user-service
+    restart: always
+    ports:
+      - "8083:8083"
+    depends_on:
+      - user_postgres
+      - eureka-service
