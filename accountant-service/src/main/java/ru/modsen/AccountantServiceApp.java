@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class LibraryServiceApp
+public class AccountantServiceApp
 {
     public static void main( String[] args )
     {
-        SpringApplication.run(LibraryServiceApp.class,args);
+        SpringApplication.run(AccountantServiceApp.class,args);
     }
 }
