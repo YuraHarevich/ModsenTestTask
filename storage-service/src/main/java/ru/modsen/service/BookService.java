@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import ru.modsen.exception.BookNotFoundException;
 import ru.modsen.model.Book;
 import ru.modsen.repository.BookRepository;
 
@@ -37,25 +38,35 @@ public class BookService {
     public List<Book> getAllBooks(){
         return repository.findAll();
     }
-    public Optional<Book> getById(long id){
-        return repository.findById(id);
+    public Book getById(long id){
+        if(repository.findById(id).isEmpty())
+            throw new BookNotFoundException("No book with such id");
+        else
+            return repository.findById(id).get();
     }
-    public Optional<Book> getByISBN(String ISBN){
-        return repository.findByISBN(ISBN);
+    public Book getByISBN(String ISBN){
+        if(repository.findByIsbn(ISBN).isEmpty())
+            throw new BookNotFoundException("No book with such ISBN");
+        return repository.findByIsbn(ISBN).get();
     }
 
     public void delete(long id) {
         repository.deleteById(id);
     }
     public void changeBook(Book book,long id){
-        // todo NO SUCH BOOK
-        Book modifyingBook = repository.findById(id).get();
-        modifyingBook.setAuthor(book.getAuthor());
-        modifyingBook.setName(book.getName());
-        modifyingBook.setISBN(book.getISBN());
-        modifyingBook.setDescription(book.getDescription());
-        modifyingBook.setGenre(book.getGenre());
-        repository.save(modifyingBook);
+        Optional<Book> optional = repository.findById(id);
+        if(optional.isPresent())
+        {
+            Book modifyingBook = optional.get();
+            modifyingBook.setAuthor(book.getAuthor());
+            modifyingBook.setName(book.getName());
+            modifyingBook.setIsbn(book.getIsbn());
+            modifyingBook.setDescription(book.getDescription());
+            modifyingBook.setGenre(book.getGenre());
+            repository.save(modifyingBook);
+        }
+        else
+            throw new BookNotFoundException("No such book found");
     }
 
 }

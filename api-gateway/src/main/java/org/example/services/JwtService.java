@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.AllArgsConstructor;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.HttpStatus;
@@ -22,30 +23,29 @@ import java.util.function.Function;
 public class JwtService {
     @Value("${token.signing.key}")
     private String jwtSigningKey;
-    private final RestTemplate restTemplate;
-
-    public JwtService(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-    private <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
+    private <T> T extractClaim (String token, Function<Claims, T> claimsResolvers) throws SignatureException {
         final Claims claims = extractAllClaims(token);
         return claimsResolvers.apply(claims);
     }
-    public boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(String token) throws SignatureException{
         return extractExpiration(token).before(new Date());
     }
 
-    private Date extractExpiration(String token) {
+    private Date extractExpiration(String token) throws SignatureException {
         return extractClaim(token, Claims::getExpiration);
     }
-    private Claims extractAllClaims(String token) {
+    public String extractRole(String token) throws SignatureException {
+        return extractClaim(token,
+                claims -> claims.get("role",String.class));
+    }
+    private Claims extractAllClaims(String token) throws SignatureException {
         return Jwts.parser()
                 .verifyWith(getSigningKey())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
     }
-    private SecretKey getSigningKey() {
+    private SecretKey getSigningKey() throws SignatureException {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }

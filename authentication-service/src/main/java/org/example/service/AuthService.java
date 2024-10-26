@@ -54,4 +54,7 @@ public class AuthService {
                 UserDTO.class);
         return new AuthenticationResponse(jwtService.generateToken(user));
     }
+
+    //сделано для демонстрации
+
 }

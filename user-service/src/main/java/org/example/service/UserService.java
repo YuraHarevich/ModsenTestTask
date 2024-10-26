@@ -3,6 +3,7 @@ package org.example.service;
 import lombok.RequiredArgsConstructor;
 import org.example.model.User;
 import org.example.repository.UserRepository;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,4 +32,13 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    @Deprecated
+    public void setAdminRole(User user){
+        user.setRole("ROLE_ADMIN");
+        userRepository.save(user);
+    }
+
+    public Optional<User> getById(long id) {
+        return userRepository.findById(id);
+    }
 }

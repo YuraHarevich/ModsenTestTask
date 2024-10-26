@@ -4,7 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import ru.modsen.exception.BookNotFoundException;
 import ru.modsen.model.Book;
 import ru.modsen.service.BookService;
 
@@ -24,14 +28,13 @@ public class MainController {
     @GetMapping("id/{id}")
     @Operation(summary = "Получение книг по id")
     public Book getBookByID(@PathVariable("id")long id){
-        //todo: solve optional
-        return service.getById(id).get();
+
+        return service.getById(id);
     }
     @GetMapping("isbn/{ISBN}")
     @Operation(summary = "Получение книг по ISBN")
     public Book getBookByISBN(@PathVariable("ISBN")String ISBN){
-        //todo: solve optional
-        return service.getByISBN(ISBN).get();
+        return service.getByISBN(ISBN);
     }
     @PostMapping("create")
     @Operation(summary = "Создание новой книги")
@@ -45,8 +48,17 @@ public class MainController {
     }
     @PatchMapping("change/{id}")
     @Operation(summary = "Изменение книги")
-    public void changeBook(@RequestBody Book book,
+    public void changeBook(@RequestBody @Valid Book book,
                            @PathVariable("id")long id){
         service.changeBook(book,id);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Не верный формат данных");
+    }
+    @ExceptionHandler(BookNotFoundException.class)
+    public ResponseEntity<String> handleBOokNotFound(BookNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("указанная книга не найдена");
     }
 }

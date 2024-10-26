@@ -33,7 +33,7 @@ public class Book {
     @Pattern(regexp = "97[89]-\\d{1,5}-\\d{1,7}-\\d{1,6}-\\d{1}",
     message = "String should be of standard ISBN-13")
     @Column(unique = true)
-    private String ISBN;
+    private String isbn;
 
     @Schema(description = "название", example = "1984")
     @NotBlank(message = "Название не может отсутствовать")
