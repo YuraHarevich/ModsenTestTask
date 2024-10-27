@@ -37,6 +37,6 @@ public class AuthController {
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException e) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Не верный формат данных");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Неверный формат данных");
     }
 }
