@@ -3,6 +3,7 @@ package ru.modsen.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.modsen.model.TookBook;
@@ -20,7 +21,10 @@ public class LibraryController {
 
     @Operation(summary = "Добавление взятой книги")
     @PostMapping("add/{id}")
-    public ResponseEntity<Void> createNewBook(@PathVariable("id") long id){
+    public ResponseEntity<String> createNewBook(@PathVariable("id") long id){
+        if(service.getById(id).isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Книга уже взята");
+        }
         TookBook book = TookBook.builder()
                 .book_id(id)
                 .took_time(LocalDateTime.now())

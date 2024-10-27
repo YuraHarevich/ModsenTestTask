@@ -2,8 +2,10 @@ package ru.modsen.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -60,5 +62,9 @@ public class MainController {
     @ExceptionHandler(BookNotFoundException.class)
     public ResponseEntity<String> handleBOokNotFound(BookNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("указанная книга не найдена");
+    }
+    @ExceptionHandler({DataIntegrityViolationException.class, ConstraintViolationException.class})
+    public ResponseEntity<String> handleDuplicateKeyException() {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Книга с таким ISBN уже существует.");
     }
 }

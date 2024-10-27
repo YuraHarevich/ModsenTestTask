@@ -36,7 +36,6 @@ public class AuthService {
         }catch (HttpClientErrorException e){
             throw new UnauthorizedException("User with such username not found or wrong data type");
         }
-
             if (!BCrypt.checkpw(request.getPassword(), response.getPassword()))
                 throw new UnauthorizedException("Bad credentials or wrong data type");
             return new AuthenticationResponse(jwtService.generateToken(response));

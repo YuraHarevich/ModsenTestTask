@@ -33,7 +33,6 @@ public class UserController {
         else{
             userService.setAdminRole(optional.get());
             return ResponseEntity.ok("Admin successfully set");
-
         }
     }
 }
